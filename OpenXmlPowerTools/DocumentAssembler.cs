@@ -883,7 +883,7 @@ namespace OpenXmlPowerTools
         /// <param name="imagePartType">Type of the image part.</param>
         /// <param name="relationshipId">The relationship identifier.</param>
         /// <returns>ImagePart.</returns>
-        private static ImagePart GetImagePart(OpenXmlPart part, ImagePartType imagePartType, string relationshipId)
+        private static ImagePart GetImagePart(OpenXmlPart part, PartTypeInfo imagePartType, string relationshipId)
         {
             var mainDocumentPart = part as MainDocumentPart;
             if (mainDocumentPart != null)
@@ -1004,7 +1004,7 @@ namespace OpenXmlPowerTools
             if (blip != null)
             {
                 // Add the image to main document part
-                ImagePartType imagePartType;
+                PartTypeInfo imagePartType;
                 string error;
                 var stream = Image2Stream(imagePath, out imagePartType, out error);
                 if (stream != null)
@@ -1078,7 +1078,7 @@ namespace OpenXmlPowerTools
         /// <param name="imagePartType">Image Part Type to be embedded in the document and to be
         /// referenced by image control</param>
         /// <param name="error">Error message</param>
-        private static Stream Image2Stream(string inputImage, out ImagePartType imagePartType, out string error)
+        private static Stream Image2Stream(string inputImage, out PartTypeInfo imagePartType, out string error)
         {
             string imageType;
             Stream stream;
@@ -1098,7 +1098,7 @@ namespace OpenXmlPowerTools
                 }
                 catch (Exception)
                 {
-                    imagePartType = default(ImagePartType);
+                    imagePartType = default(PartTypeInfo);
                     error = "Invalid Image data format";
                     return null;
                 }
@@ -1114,7 +1114,7 @@ namespace OpenXmlPowerTools
                 }
                 catch
                 {
-                    imagePartType = default(ImagePartType);
+                    imagePartType = default(PartTypeInfo);
                     error = "Invalid Image path";
                     return null;
                 }
@@ -1137,7 +1137,7 @@ namespace OpenXmlPowerTools
                     imagePartType = ImagePartType.Bmp;
                     break;
                 default:
-                    imagePartType = default(ImagePartType);
+                    imagePartType = default(PartTypeInfo);
                     error = "Invalid image type";
                     return null;
             }
